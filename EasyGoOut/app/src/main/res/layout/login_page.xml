@@ -3,8 +3,53 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_user_name"
+        android:layout_alignTop="@+id/text_user_name"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_toLeftOf="@+id/text_user_name"
+        android:layout_toStartOf="@+id/text_user_name"
+        android:autoLink="all"
+        android:text="用户名"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/text_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/text_user_password"
+        android:layout_alignLeft="@+id/text_user_password"
+        android:layout_alignStart="@+id/text_user_password"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="请输入用户名"
+        android:inputType="textPersonName"
+        android:layout_alignRight="@+id/text_user_password"
+        android:layout_alignEnd="@+id/text_user_password" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="密  码"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@+id/text_user_name"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignBottom="@+id/text_user_password" />
+
+    <EditText
+        android:id="@+id/text_user_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -16,56 +61,13 @@
         android:hint="请输入密码"
         android:inputType="textPassword" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editText"
-        android:layout_alignLeft="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:hint="请输入用户名"
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="密  码"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_below="@+id/editText2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_alignBottom="@+id/editText" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/editText2"
-        android:layout_alignTop="@+id/editText2"
-        android:layout_marginEnd="11dp"
-        android:layout_marginRight="11dp"
-        android:layout_toLeftOf="@+id/editText2"
-        android:layout_toStartOf="@+id/editText2"
-        android:autoLink="all"
-        android:text="用户名"
-        android:textAllCaps="false"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/editText"
+        android:layout_alignEnd="@+id/text_user_password"
         android:layout_alignLeft="@+id/textView"
-        android:layout_alignRight="@+id/editText"
+        android:layout_alignRight="@+id/text_user_password"
         android:layout_alignStart="@+id/textView"
         android:layout_below="@+id/textView"
         android:layout_marginTop="20dp"
@@ -74,23 +76,23 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/btn_forget_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_below="@+id/button"
+        android:layout_alignLeft="@+id/btn_login"
+        android:layout_alignStart="@+id/btn_login"
+        android:layout_below="@+id/btn_login"
         android:layout_marginTop="38dp"
         android:text="忘记密码"
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/btn_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_alignEnd="@+id/button"
-        android:layout_alignRight="@+id/button"
+        android:layout_alignBottom="@+id/btn_forget_password"
+        android:layout_alignEnd="@+id/btn_login"
+        android:layout_alignRight="@+id/btn_login"
         android:text="立即注册"
         android:textColor="@color/black" />
 </RelativeLayout>
