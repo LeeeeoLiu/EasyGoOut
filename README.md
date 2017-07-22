@@ -12,6 +12,6 @@
 - [ ] tool bar返回按钮设置
 - [ ] TextView下划线
 - [ ] button right arrow
-- [ ] 
+- [ ] edit text 空白输入框
 
 
