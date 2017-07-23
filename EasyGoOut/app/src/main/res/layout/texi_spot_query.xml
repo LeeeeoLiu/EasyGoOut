@@ -119,7 +119,7 @@
         android:layout_alignTop="@+id/button"
         android:layout_toStartOf="@+id/textView11"
         android:layout_toLeftOf="@+id/textView11"
-        android:entries="@array/text_spot_time"
+        android:entries="@array/texi_spot_time"
         android:layout_above="@+id/button2" />
 
     <TextView
