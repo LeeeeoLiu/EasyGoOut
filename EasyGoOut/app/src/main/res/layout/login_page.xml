@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <include layout="@layout/tool_bar_top"/>
+    <include layout="@layout/tool_bar_top"
+        android:id="@+id/include2" />
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -53,14 +54,15 @@
         android:id="@+id/text_user_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="49dp"
-        android:layout_marginRight="49dp"
         android:ems="10"
         android:hint="请输入密码"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="176dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/imageView10"
+        android:layout_alignStart="@+id/imageView10" />
 
     <Button
         android:id="@+id/btn_login"
@@ -96,5 +98,15 @@
         android:layout_alignRight="@+id/btn_login"
         android:text="立即注册"
         android:textColor="@color/black" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="13dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/car2"
+        android:layout_above="@+id/textView2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
