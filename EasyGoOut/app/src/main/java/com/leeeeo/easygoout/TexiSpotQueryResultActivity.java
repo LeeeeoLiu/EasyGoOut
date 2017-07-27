@@ -1,16 +1,19 @@
 package com.leeeeo.easygoout;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +32,12 @@ import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,10 +51,14 @@ public class TexiSpotQueryResultActivity extends AppCompatActivity implements On
     private String cityName;
     private String keyName;
     private Button poiTitle;
+
+
     private PoiSearch mPoiSearch = null;
     int searchType = 0;  // 搜索的类型，在显示时区分
     private int loadIndex = 0;
     private PoiResult poiResult;
+    private Button btnSuccessSort;
+    private Button btnDistanceSort;
     LatLng center = new LatLng(39.92235, 116.380338);
     int radius = 100;
     LatLng southwest = new LatLng(39.92235, 116.380338);
@@ -73,8 +85,8 @@ public class TexiSpotQueryResultActivity extends AppCompatActivity implements On
         keyName = bundle.getString("key_name");
         poiTitle = (Button) findViewById(R.id.poi_title);
         poiListView = (ListView) findViewById(R.id.poi_result);//实例化ListView
-//        ArrayList<HashMap<String,String>>poiTarget;
-
+        btnSuccessSort = (Button) findViewById(R.id.btn_success_sort);
+        btnDistanceSort = (Button) findViewById(R.id.btn_distance_sort);
 
         mPoiSearch = PoiSearch.newInstance();
         mPoiSearch.setOnGetPoiSearchResultListener(this);
@@ -82,19 +94,33 @@ public class TexiSpotQueryResultActivity extends AppCompatActivity implements On
         poiSearchCityProcess(cityName, keyName);
 
 
-     //   mData = getData();//为刚才的变量赋值
-//        MyAdapter adapter = new MyAdapter(this);//创建一个适配器
+        btnSuccessSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnSuccessSort.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style_black));
+//                btnDistanceSort.setback
+                btnSuccessSort.setTextColor(Color.parseColor("#FFFFFF"));
+                btnDistanceSort.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style_white));
+                btnDistanceSort.setTextColor(Color.parseColor("#000000"));
+                Collections.sort(mData, new PoiNameComparator());
+                MyAdapter adapter = new MyAdapter(getApplicationContext());//创建一个适配器
+                poiListView.setAdapter(adapter);//为ListView控件绑定适配器
+            }
+        });
 
-      //  MyAdapter adapter = new MyAdapter(getApplicationContext());//创建一个适配器
-
-//        System.out.println(mData.size());
-//        for (int i=0;i<mData.size();i++)
-//        {
-//            System.out.println(mData.get(i).get("poi_name").toString());
-//        }
-
-      //  poiListView.setAdapter(adapter);//为ListView控件绑定适配器
-
+        btnDistanceSort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnDistanceSort.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style_black));
+//                btnDistanceSort.setback
+                btnDistanceSort.setTextColor(Color.parseColor("#FFFFFF"));
+                btnSuccessSort.setBackgroundDrawable(getResources().getDrawable(R.drawable.button_style_white));
+                btnSuccessSort.setTextColor(Color.parseColor("#000000"));
+                Collections.sort(mData, new PoiAddressComparator());
+                MyAdapter adapter = new MyAdapter(getApplicationContext());//创建一个适配器
+                poiListView.setAdapter(adapter);//为ListView控件绑定适配器
+            }
+        });
 
     }
 
@@ -118,7 +144,7 @@ public class TexiSpotQueryResultActivity extends AppCompatActivity implements On
             return;
         }
         if (result.error == SearchResult.ERRORNO.NO_ERROR) {
-           // mData.clear();
+            // mData.clear();
             ArrayList<HashMap<String, Object>> list = new ArrayList<>();
             HashMap<String, Object> map;
             poiTitle.setText("起点附近共有" + result.getAllPoi().size() + "个推荐打车点");
@@ -251,5 +277,21 @@ public class TexiSpotQueryResultActivity extends AppCompatActivity implements On
         }
 
         return list;
+    }
+
+    static class PoiNameComparator implements Comparator {
+        public int compare(Object object1, Object object2) {// 实现接口中的方法
+            HashMap<String, Object> map1 = (HashMap<String, Object>) object1; // 强制转换
+            HashMap<String, Object> map2 = (HashMap<String, Object>) object2;
+            return map1.get("poi_name").toString().compareTo(map2.get("poi_name").toString());
+        }
+    }
+
+    static class PoiAddressComparator implements Comparator {
+        public int compare(Object object1, Object object2) {// 实现接口中的方法
+            HashMap<String, Object> map1 = (HashMap<String, Object>) object1; // 强制转换
+            HashMap<String, Object> map2 = (HashMap<String, Object>) object2;
+            return map1.get("poi_address").toString().compareTo(map2.get("poi_address").toString());
+        }
     }
 }

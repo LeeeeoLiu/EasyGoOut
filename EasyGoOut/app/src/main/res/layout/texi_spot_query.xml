@@ -105,67 +105,62 @@
         android:layout_alignLeft="@+id/mapView2"
         android:layout_alignStart="@+id/mapView2" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignTop="@+id/button"
         android:layout_alignLeft="@+id/text_time"
         android:layout_alignStart="@+id/text_time"
-        android:layout_alignTop="@+id/button"
-        android:layout_toStartOf="@+id/textView13"
-        android:entries="@array/texi_spot_time"
+        android:id="@+id/linearLayout"
         android:layout_above="@+id/button2"
-        android:layout_toLeftOf="@+id/textView13" />
+        android:layout_alignRight="@+id/mapView2"
+        android:layout_alignEnd="@+id/mapView2">
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="小时后,即："
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:layout_alignLeft="@+id/textView11"
-        android:layout_alignStart="@+id/textView11"
-        android:layout_alignBottom="@+id/textView14" />
+        <Spinner
+            android:id="@+id/spinner_hour"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/texi_spot_time" />
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="8:30~9:00"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:layout_alignBaseline="@+id/spinner"
-        android:layout_alignBottom="@+id/spinner"
-        android:layout_alignRight="@+id/text_start_pos"
-        android:layout_alignEnd="@+id/text_start_pos" />
+        <TextView
+            android:id="@+id/text_future_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小时后,即：8:30~9:00"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <EditText
         android:id="@+id/text_start_pos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_alignEnd="@+id/mapView2"
-        android:layout_alignLeft="@+id/spinner"
-        android:layout_alignRight="@+id/mapView2"
-        android:layout_alignStart="@+id/spinner"
         android:ems="10"
         android:enabled="false"
         android:hint="请输入出发点"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignLeft="@+id/linearLayout"
+        android:layout_alignStart="@+id/linearLayout"
+        android:layout_alignRight="@+id/mapView2"
+        android:layout_alignEnd="@+id/mapView2" />
 
     <fragment
         android:id="@+id/mapView2"
         class="com.baidu.mapapi.map.SupportMapFragment"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_below="@+id/text_start_pos"
         android:clickable="true"
-        android:layout_alignRight="@+id/btn_search_poi"
-        android:layout_alignEnd="@+id/btn_search_poi"
+        android:layout_below="@+id/button2"
         android:layout_alignLeft="@+id/btn_search_poi"
         android:layout_alignStart="@+id/btn_search_poi"
+        android:layout_marginTop="8dp"
+        android:layout_alignRight="@+id/btn_search_poi"
+        android:layout_alignEnd="@+id/btn_search_poi"
         android:layout_above="@+id/btn_search_poi" />
 
     <Button
