@@ -90,14 +90,15 @@
         android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:ems="10"
-        android:inputType="textMultiLine"
         android:layout_above="@+id/btn_texi_spot_suggest"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="17dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textMultiLine" />
 
     <ImageButton
         android:id="@+id/btn_texi_spot_suggest"
@@ -119,8 +120,10 @@
         app:srcCompat="@drawable/btn2"
         android:layout_marginBottom="18dp"
         android:layout_above="@+id/btn_texi_history"
-        android:layout_alignRight="@+id/btn_setting"
-        android:layout_alignEnd="@+id/btn_setting" />
+        android:layout_toRightOf="@+id/btn_texi_spot_suggest"
+        android:layout_toEndOf="@+id/btn_texi_spot_suggest"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
 
     <ImageButton
         android:id="@+id/btn_hotspot_query"

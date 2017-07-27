@@ -86,7 +86,7 @@
         android:layout_toStartOf="@+id/textView17" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/text_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView9"
@@ -96,8 +96,8 @@
         android:text="8:23"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_alignRight="@+id/textView12"
-        android:layout_alignEnd="@+id/textView12" />
+        android:layout_alignRight="@+id/text_weather"
+        android:layout_alignEnd="@+id/text_weather" />
 
     <TextView
         android:id="@+id/textView11"
@@ -112,7 +112,7 @@
         android:layout_alignStart="@+id/textView9" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/text_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView11"
@@ -164,7 +164,9 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="16dp"
         android:entries="@array/hot_spot_time"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@+id/button9"
+        android:layout_toEndOf="@+id/button9" />
 
     <Button
         android:id="@+id/button11"

@@ -18,18 +18,18 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar8"
-        android:layout_marginLeft="64dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="13dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="18dp"
         android:text="时间："
         android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:layout_below="@+id/toolbar8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/text_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView9"
@@ -39,8 +39,8 @@
         android:text="8:23"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_alignRight="@+id/textView12"
-        android:layout_alignEnd="@+id/textView12" />
+        android:layout_alignRight="@+id/text_weather"
+        android:layout_alignEnd="@+id/text_weather" />
 
     <TextView
         android:id="@+id/textView11"
@@ -55,7 +55,7 @@
         android:layout_alignStart="@+id/textView9" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/text_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView11"
@@ -73,42 +73,41 @@
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="13dp"
-        android:layout_toLeftOf="@+id/textView12"
-        android:layout_toStartOf="@+id/textView12"
+        android:layout_marginBottom="72dp"
         android:text="选择查询区域"
         android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/textView11"
+        android:layout_alignStart="@+id/textView11" />
 
     <Button
         android:id="@+id/button13"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_alignBottom="@+id/textView19"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="18dp"
-        android:layout_marginRight="18dp"
         android:background="@android:color/holo_orange_dark"
         android:text="确定"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="14dp" />
 
     <Spinner
         android:id="@+id/spinner4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView19"
-        android:layout_toLeftOf="@+id/button13"
-        android:layout_alignLeft="@+id/textView12"
-        android:layout_alignStart="@+id/textView12" />
+        android:layout_alignBottom="@+id/textView19"
+        android:layout_alignRight="@+id/text_weather"
+        android:layout_alignEnd="@+id/text_weather"
+        android:layout_toRightOf="@+id/textView19"
+        android:layout_toEndOf="@+id/textView19" />
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/button13"
-        android:layout_below="@+id/textView11" />
+        android:layout_below="@+id/textView11"
+        android:layout_above="@+id/textView19" />
 
 </RelativeLayout>

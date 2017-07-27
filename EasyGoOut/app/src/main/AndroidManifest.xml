@@ -14,20 +14,31 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="出行易"
+        android:hardwareAccelerated="false"
+        android:icon="@drawable/logo2"
+        android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".NavigateActivity" />
+        <activity android:name=".TexiSpotQueryActivity" />
+        <activity android:name=".PoiSearchDemo"/>
+        <activity android:name=".TexiSpotQueryResultActivity"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="vWrDxVn5HRNPGS9rBYDC6alGoG7qOD9E" />
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
     </application>
 
 </manifest>

@@ -15,25 +15,24 @@
 - 打车点历史记录
 - 热点查询
 
-### 待解决问题
 
-- [x] Android:label居中显示  
- - 主要原理是，在ToolBar中添加一个TextView，然后你就可以通过设置TextView的样式，来达到你想要的效果。
- 
-    设置原来的toolbar不显示，在styles.xml
-    
-    ```
+### 已解决问题
+#### Android:label居中显示 
+主要原理是，在ToolBar中添加一个TextView，然后你就可以通过设置TextView的样式，来达到你想要的效果。
+设置原来的toolbar不显示，在styles.xml
+
+```
 <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 ```
-    改为
+改为
 
-    ```
+```
 <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 ```
    
-   将ToolBar自定义
+将ToolBar自定义
    
-   ```
+```
    <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/toolbar8"
@@ -56,30 +55,16 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 </android.support.v7.widget.Toolbar>
-   ```
+
+```
    
-   最后在你要使用ToolBar的地方include即可
+最后在你要使用ToolBar的地方include即可
    
-   ```
+```
    <include layout="@layout/tool_bar_top"/>
-   ```
-   
-    
+```
 
-
-- [ ] tool bar返回按钮设置
-- [ ] TextView下划线
-- [ ] button right arrow
-- [ ] edit text 空白输入框
-- [ ] 热点查询结果网格分区
-- [ ] map显示
-- [ ] map下方附近地点显示
-- [ ] 搜索结果listview显示
-- [ ] listview 随滑动变长
-- [ ] qq、微信、微博分享功能
-
-
-- 报错
+#### build报错
 
 ```
 
@@ -92,8 +77,8 @@ Error:Execution failed for task ':app:processDebugManifest'.
 
 把下面这些代码添加到build.gradle最后里即可
 
-```
 
+```
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
         def requested = details.requested
@@ -104,12 +89,27 @@ configurations.all {
         }
     }
 }
-
 ```
+
+
+
+### 待解决问题
+- [ ] tool bar返回按钮设置
+- [ ] TextView下划线
+- [ ] button right arrow
+- [ ] edit text 空白输入框
+- [ ] 热点查询结果网格分区
+- [ ] map显示
+- [ ] map下方附近地点显示
+- [ ] 搜索结果listview显示
+- [ ] listview 随滑动变长
+- [ ] qq、微信、微博分享功能
+
 
 ## 待完善功能
 
-- [ ] 用户注册根据数据库判断是否重复
+- [x] 用户注册根据数据库判断是否重复
+- [ ] 找回密码功能
 
 ## 使用第三方
 
@@ -118,4 +118,7 @@ configurations.all {
 ### bmob后端云服务平台
 
 ### LeanCloud
+
+### 百度APIStore 天气查询 
+
 
