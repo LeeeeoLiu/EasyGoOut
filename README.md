@@ -91,6 +91,13 @@ configurations.all {
 }
 ```
 
+#### Caused by: android.os.NetworkOnMainThreadException
+
+这个是因为一个APP如果在主线程中请求网络操作，将会抛出此异常。Android这个设计是为了防止网络请求时间过长而导致界面假死的情况发生。
+
+##### 解决办法
+
+将请求网络资源的代码使用Thread去操作。在Runnable中做HTTP请求，不用阻塞UI线程。
 
 
 ### 待解决问题
@@ -241,5 +248,52 @@ https://github.com/crazyandcoder/citypicker
 
 
 ### 百度地图 静态图api
-http://api.map.baidu.com/staticimage/v2?ak=vWrDxVn5HRNPGS9rBYDC6alGoG7qOD9E&mcode=3C:71:B4:DA:7B:8D:2C:5A:29:32:FC:C6:FB:AD:F3:CE:AA:8E:66:6E;com.leeeeo.easygoout&zoom=14&width=300&height=400&center=%E4%B8%9C%E5%8C%97%E5%A4%A7%E5%AD%A6
+
+注意中文名要用EFCODE UTF编码
+
+#### 使用条款与限制
+
+- URL长度：2048
+- 点标记的数量：50个
+- 调用次数：同一个开发者帐号下的HTTP/HTTPS请求，配额、并发共享。
+- 默认配额及并发量说明如下：
+
+|分类|	未认证|	个人认证|	企业认证|
+|-----|-----|----|-----|
+|日配额（次）|	1,000,000|	3,000,000|6,000,000|
+|分钟并发量（次/分钟）|	24,000|	30,000|30,000|
+
+
+#### 服务地址
+
+http://api.map.baidu.com/staticimage/v2
+
+##### 组成说明：
+
+- 域名：http://api.map.baidu.com
+- 服务名：staticimage
+- 版本号：v2
+
+
+#### 服务参数列表
+
+|参数名|必选	|默认值|	描述|
+|---|---|---|---|
+|ak|	是	|无|	用户的访问密钥。支持浏览器端AK和Android/IOS SDK的AK，服务端AK不支持sn校验方式。|
+|mcode	|否	|无	|安全码。若为Android/IOS SDK的ak, 该参数必需。|
+|width	|否	|400	|图片宽度。取值范围：(0, 1024]。Scale=2,取值范围：(0, 512]。|
+|height	|否	|300	|图片高度。取值范围：(0, 1024]。Scale=2,取值范围：(0, 512]。|
+|center	|否|	北京	|地图中心点位置，参数可以为经纬度坐标或名称。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。|
+|zoom	|否|	11	|地图级别。高清图范围[3, 18]；低清图范围[3,19]|
+|copyright|	否	|pl|	静态图版权样式，0表示log+文字描述样式，1表示纯文字描述样式，默认为0。|
+|dpiType	|否|	pl|	手机屏幕类型。取值范围:{ph：高分屏，pl：低分屏(默认)}，高分屏即调用高清地图，低分屏为普通地图。|
+|coordtype|	否	|bd09ll|	静态图的坐标类型。支持wgs84ll（wgs84坐标）/gcj02ll（国测局坐标）/bd09ll（百度经纬度）/bd09mc（百度墨卡托）。默认bd09ll（百度经纬度）|
+|scale|	否|	null|	返回图片大小会根据此标志调整。取值范围为1或2：1表示返回的图片大小为size= width * height;2表示返回图片为(width*2)*(height *2)，且zoom加1 注：如果zoom为最大级别，则返回图片为（width*2）*（height*2），zoom不变。|
+|bbox	|否|	null|	地图视野范围。格式：minX,minY;maxX,maxY。|
+|markers	|否	|null	|标注，可通过经纬度或地址/地名描述；多个标注之间用竖线分隔。|
+|markerStyles	|否|	null	|与markers有对应关系。markerStyles可设置默认图标样式和自定义图标样式。其中设置默认图标样式时，可指定的属性包括size,label和color；设置自定义图标时，可指定的属性包括url，注意，设置自定义图标时需要先传-1以此区分默认图标。|
+|labels	|否|	null	|标签，可通过经纬度或地址/地名描述；多个标签之间用竖线分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。|
+|labelStyles	|否|	null|	标签样式 content, fontWeight,fontSize,fontColor,bgColor, border。与labels一一对应。|
+|paths	|否	|null	|折线，可通过经纬度或地址/地名描述；多个折线用竖线"|"分隔；每条折线的点用分号";"分隔；点坐标用逗号","分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。|
+|pathStyles|	否	|null	|折线样式color,weight,opacity[,fillColor]。
 

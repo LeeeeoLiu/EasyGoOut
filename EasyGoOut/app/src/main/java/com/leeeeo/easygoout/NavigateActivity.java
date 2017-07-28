@@ -62,14 +62,16 @@ public class NavigateActivity extends AppCompatActivity {
         btnHotspotQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(NavigateActivity.this, HotSpotQueryActivity.class);
+                startActivity(intent);
             }
         });
 
         btnTexiHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(NavigateActivity.this, TexiHistoryActivity.class);
+                startActivity(intent);
             }
         });
 
