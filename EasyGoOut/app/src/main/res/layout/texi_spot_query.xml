@@ -38,7 +38,7 @@
         android:layout_alignStart="@+id/button" />
 
     <TextView
-        android:id="@+id/text_time"
+        android:id="@+id/supply_future_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView9"
@@ -54,18 +54,18 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_time"
-        android:layout_alignBottom="@+id/text_time"
+        android:layout_alignBaseline="@+id/supply_future_time"
+        android:layout_alignBottom="@+id/supply_future_time"
         android:layout_marginLeft="34dp"
         android:layout_marginStart="34dp"
-        android:layout_toEndOf="@+id/text_time"
-        android:layout_toRightOf="@+id/text_time"
+        android:layout_toEndOf="@+id/supply_future_time"
+        android:layout_toRightOf="@+id/supply_future_time"
         android:text="当前天气："
         android:textColor="@color/black"
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/text_weather"
+        android:id="@+id/supply_future_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView11"
@@ -110,8 +110,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignTop="@+id/button"
-        android:layout_alignLeft="@+id/text_time"
-        android:layout_alignStart="@+id/text_time"
+        android:layout_alignLeft="@+id/supply_future_time"
+        android:layout_alignStart="@+id/supply_future_time"
         android:id="@+id/linearLayout"
         android:layout_above="@+id/button2"
         android:layout_alignRight="@+id/mapView2"

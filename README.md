@@ -215,3 +215,31 @@ unit
 ```
 
 
+### citypicker
+
+https://github.com/crazyandcoder/citypicker
+
+#### 前言
+在实际的项目中需要使用到省市区三级联动的功能，在网上找来找去，都没有找到一个合适的库， 所以自己就封装了一个，不需要自己添加数据源，直接引用即可，一行代码搞定城市选择。怎么简单，怎么方便，怎么来，就是这么任性！
+
+#### 亮点
+
+ 1. 无需自己配置省市区域的数据，不需要再进行解析之类的繁杂操作，只需引用即可，结果返回省市区和邮编等四项数据信息，如果不满意样式的话可以自己修改源码！
+ 2. 多种样式选择，高仿iOS滚轮实现以及列表选择。
+
+#### 效果预览
+
+![](http://img.blog.csdn.net/20170526093653244?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlqaV94Yw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+#### 应用在实际项目中效果
+
+**1、高仿iOS滚轮实现城市选择器**
+
+![](http://img.blog.csdn.net/20161209211413273?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlqaV94Yw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)  ![](http://img.blog.csdn.net/20161209211426836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlqaV94Yw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast) ![](http://img.blog.csdn.net/20161209211442594?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlqaV94Yw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+
+
+
+
+### 百度地图 静态图api
+http://api.map.baidu.com/staticimage/v2?ak=vWrDxVn5HRNPGS9rBYDC6alGoG7qOD9E&mcode=3C:71:B4:DA:7B:8D:2C:5A:29:32:FC:C6:FB:AD:F3:CE:AA:8E:66:6E;com.leeeeo.easygoout&zoom=14&width=300&height=400&center=%E4%B8%9C%E5%8C%97%E5%A4%A7%E5%AD%A6
+

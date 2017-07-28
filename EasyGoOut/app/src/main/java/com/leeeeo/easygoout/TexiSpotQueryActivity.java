@@ -1,12 +1,10 @@
 package com.leeeeo.easygoout;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +18,6 @@ import android.widget.Toast;
 
 import com.baidu.mapapi.BMapManager;
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.http.HttpClient;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -48,22 +45,14 @@ import com.baidu.mapapi.search.poi.PoiSearch;
 import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.lljjcoder.citypickerview.widget.CityPicker;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -168,11 +157,11 @@ public class TexiSpotQueryActivity extends AppCompatActivity implements OnGetPoi
 
     private void init() {
         startPosition = (EditText) findViewById(R.id.text_start_pos);
-        weather = (TextView) findViewById(R.id.text_weather);
+        weather = (TextView) findViewById(R.id.supply_future_weather);
         btnSearchPoi = (Button) findViewById(R.id.btn_search_poi);
         timeSelect = (Spinner) findViewById(R.id.spinner_hour);
         futureTime = (TextView) findViewById(R.id.text_future_time);
-        currentTime = (TextView) findViewById(R.id.text_time);
+        currentTime = (TextView) findViewById(R.id.supply_future_time);
 
         handler.post(updateThread);
 
@@ -184,6 +173,67 @@ public class TexiSpotQueryActivity extends AppCompatActivity implements OnGetPoi
 
         startPosition.setEnabled(true);
         startPosition.setClickable(true);
+
+
+
+        String address = null;
+        try {
+            address = weatherApi + URLEncoder.encode("沈阳市","UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        Log.d("Weather", address);
+
+        final String finalAddress = address;
+        new Thread() {
+            public void run() {
+                int code;
+                try {
+                    URL url = new URL(finalAddress);
+                    HttpURLConnection conn = (HttpURLConnection) url
+                            .openConnection();
+                    conn.setRequestMethod("GET");//使用GET方法获取
+                    conn.setConnectTimeout(5000);
+                    code = conn.getResponseCode();
+                    System.out.println(url);
+                    System.out.println(code);
+                    if (code == 200) {
+                        /**
+                         * 如果获取的code为200，则证明数据获取是正确的。
+                         */
+                        InputStream is = conn.getInputStream();
+                        String result = HttpUtils.readMyInputStream(is);
+
+                        /**
+                         * 子线程发送消息到主线程，并将获取的结果带到主线程，让主线程来更新UI。
+                         */
+                        Message msg = new Message();
+                        msg.obj = result;
+                        msg.what = SUCCESS;
+                        weatherHandler.sendMessage(msg);
+
+                    } else {
+
+                        Message msg = new Message();
+                        msg.what = ERRORCODE;
+                        weatherHandler.sendMessage(msg);
+                    }
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                    /**
+                     * 如果获取失败，或出现异常，那么子线程发送失败的消息（FAILURE）到主线程，主线程显示Toast，来告诉使用者，数据获取是失败。
+                     */
+                    Message msg = new Message();
+                    msg.what = FAILURE;
+                    weatherHandler.sendMessage(msg);
+                }
+            }
+
+            ;
+        }.start();
+
+
 
 
         btnSearchPoi.setOnClickListener(new OnClickListener() {
@@ -234,22 +284,12 @@ public class TexiSpotQueryActivity extends AppCompatActivity implements OnGetPoi
                             e.printStackTrace();
                         }
                         Log.d("Weather", address);
-//                        String jsonString = getWeatherJsonString(address);
-//                        Log.d("Weather", jsonString);
-
                         final String finalAddress = address;
                         new Thread() {
                             public void run() {
                                 int code;
                                 try {
                                     URL url = new URL(finalAddress);
-//                                    URLEncoder.encode("内容","UTF-8");
-                                    /**
-                                     * 这里网络请求使用的是类HttpURLConnection，另外一种可以选择使用类HttpClient。
-                                     */
-//                                    URLConnection conn=url.openConnection();
-//                                    StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskReads().detectDiskWrites().detectNetwork().penaltyLog().build());
-
                                     HttpURLConnection conn = (HttpURLConnection) url
                                             .openConnection();
                                     conn.setRequestMethod("GET");//使用GET方法获取
@@ -293,19 +333,6 @@ public class TexiSpotQueryActivity extends AppCompatActivity implements OnGetPoi
                             ;
                         }.start();
 
-
-//                        JSONObject jsonObject = null;
-//                        try {
-//                            jsonObject = new JSONObject(jsonString);
-//                            JSONObject results = jsonObject.getJSONObject("results");
-//                            JSONObject now = results.getJSONObject("now");
-//                            String nowWeather=now.getString("text");
-//                            weather.setText(nowWeather);
-//                            Log.d("Weather",nowWeather);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-
                     }
 
                     @Override
@@ -336,123 +363,6 @@ public class TexiSpotQueryActivity extends AppCompatActivity implements OnGetPoi
 
     }
 
-
-//    /**
-//     * 根据给定的url访问网络, 抓去html代码
-//     *
-//     * @param url
-//     * @return
-//     */
-//    protected String getHtmlFromInternet(String url) {
-//
-//        try {
-//            URL mURL = new URL(url);
-//            HttpURLConnection conn = (HttpURLConnection) mURL.openConnection();
-//
-//            conn.setRequestMethod("GET");
-//            conn.setConnectTimeout(10000);
-//            conn.setReadTimeout(5000);
-//
-////          conn.connect();
-//
-//            int responseCode = conn.getResponseCode();
-//
-//            if (responseCode == 200) {
-//                InputStream is = conn.getInputStream();
-//                String html = getStringFromInputStream(is);//把流转换成字符串
-//                Log.d("Weather", "html " + html);
-//                return html;
-//            } else {
-//                Log.i("Weather", "访问失败: " + responseCode);
-//            }
-//        } catch (Exception e) {
-//            Log.i("Weather", "访问失败: " + e.getCause());
-//            e.printStackTrace();
-//        }
-//        Log.i("Weather", "访问失败:return null ");
-//        return null;
-//    }
-//
-//
-//    /**
-//     * 根据流返回一个字符串信息
-//     * 也就是把流转换成字符串
-//     *
-//     * @param is
-//     * @return
-//     * @throws IOException
-//     */
-//    private String getStringFromInputStream(InputStream is) throws IOException {
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();//字节数组输出流
-//        byte[] buffer = new byte[1024];
-//        int len = -1;
-//
-//        while ((len = is.read(buffer)) != -1) {
-//            baos.write(buffer, 0, len);
-//        }
-//        is.close();
-//
-//        String html = baos.toString();  // 把流中的数据转换成字符串, 采用的编码是: utf-8
-//
-//        String charset = "utf-8";
-//        if (html.contains("gbk") || html.contains("gb2312")
-//                || html.contains("GBK") || html.contains("GB2312")) {       // 如果包含gbk, gb2312编码, 就采用gbk编码进行对字符串编码
-//            charset = "gbk";
-//        }
-//
-//        html = new String(baos.toByteArray(), charset); // 对原有的字节数组进行使用处理后的编码名称进行编码（打回原形再设置编码）
-//        baos.close();
-//        return html;
-//    }
-
-
-//    public String getWeatherJsonString(String url) {
-//        String result;
-//        InputStream is = null;
-//        ByteArrayOutputStream baos = null;
-//        try {
-//            URL netUrl = new URL(url); //2
-//            // 打开一个链接
-//            HttpURLConnection conn = (HttpURLConnection) netUrl.openConnection(); //3
-//            conn.setReadTimeout(5 * 1000);
-//            conn.setConnectTimeout(5 * 1000); //4
-//            conn.setRequestMethod("GET"); //5
-//
-//            is = conn.getInputStream(); //6
-//            int len = -1;
-//            byte[] buffer = new byte[128]; //7
-//            baos = new ByteArrayOutputStream();
-//            //读取输入流
-//            while ((len = is.read(buffer)) != -1) {
-//                baos.write(buffer, 0, len);
-//            }
-//            baos.flush(); //清除缓冲区
-//            result = new String(baos.toByteArray()); //8输入流本地化
-//            return result;
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        } finally {
-//            // lose all the resources!!
-//            if (baos != null) {
-//                try {
-//                    baos.close();
-//                } catch (IOException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            }
-//            if (is != null) {
-//                try {
-//                    is.close();
-//                } catch (IOException e) {
-//                    // TODO Auto-generated catch block
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//        return null;
-//    }
 
 
     Handler handler = new Handler();//创建Handler

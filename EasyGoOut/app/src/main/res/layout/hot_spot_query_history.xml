@@ -101,7 +101,7 @@
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner_supply_future"
         android:layout_width="250dp"
         android:layout_height="35dp"
         android:layout_alignBottom="@+id/button9"
@@ -125,16 +125,16 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/button10"
         android:layout_alignStart="@+id/button10"
-        android:layout_alignRight="@+id/textView18"
-        android:layout_alignEnd="@+id/textView18" />
+        android:layout_alignRight="@+id/supply_query_future_area"
+        android:layout_alignEnd="@+id/supply_query_future_area" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/supply_query_future_area"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_alignBottom="@+id/button10"
-        android:layout_alignEnd="@+id/spinner2"
-        android:layout_alignRight="@+id/spinner2"
+        android:layout_alignEnd="@+id/spinner_supply_future"
+        android:layout_alignRight="@+id/spinner_supply_future"
         android:text="辽宁省 沈阳市 和平区"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -161,10 +161,10 @@
         android:id="@+id/editText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/spinner2"
-        android:layout_alignLeft="@+id/spinner2"
-        android:layout_alignRight="@+id/spinner2"
-        android:layout_alignStart="@+id/spinner2"
+        android:layout_alignEnd="@+id/spinner_supply_future"
+        android:layout_alignLeft="@+id/spinner_supply_future"
+        android:layout_alignRight="@+id/spinner_supply_future"
+        android:layout_alignStart="@+id/spinner_supply_future"
         android:layout_alignTop="@+id/button12"
         android:ems="10"
         android:inputType="date" />

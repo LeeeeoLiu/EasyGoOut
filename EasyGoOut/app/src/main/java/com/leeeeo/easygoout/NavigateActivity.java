@@ -37,7 +37,7 @@ public class NavigateActivity extends AppCompatActivity {
         btnSupplyQuery = (ImageButton) findViewById(R.id.btn_supply_query);
         btnHotspotQuery = (ImageButton) findViewById(R.id.btn_hotspot_query);
         btnTexiHistory = (ImageButton) findViewById(R.id.btn_texi_history);
-        btnSetting=(ImageButton) findViewById(R.id.btn_setting);
+        btnSetting = (ImageButton) findViewById(R.id.btn_setting);
 
         Bundle bundle = this.getIntent().getExtras();
         textUserName.setText(bundle.getString("user_name"));
@@ -54,7 +54,8 @@ public class NavigateActivity extends AppCompatActivity {
         btnSupplyQuery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(NavigateActivity.this, SupplyQueryActivity.class);
+                startActivity(intent);
             }
         });
 

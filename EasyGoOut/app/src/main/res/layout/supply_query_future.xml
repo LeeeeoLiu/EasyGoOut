@@ -73,58 +73,61 @@
         android:layout_below="@+id/toolbar8" />
 
 
-    <TextView
-        android:id="@+id/textView9"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="当前时间："
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:id="@+id/linearLayout2"
         android:layout_below="@+id/button4"
-        android:layout_toLeftOf="@+id/textView17"
-        android:layout_toStartOf="@+id/textView17" />
+        android:layout_marginTop="15dp"
+        android:layout_alignRight="@+id/spinner_supply_future"
+        android:layout_alignEnd="@+id/spinner_supply_future"
+        android:layout_alignLeft="@+id/button9"
+        android:layout_alignStart="@+id/button9">
 
-    <TextView
-        android:id="@+id/text_time"
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前时间："
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/supply_future_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView9"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_toRightOf="@+id/textView9"
-        android:text="8:23"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_alignRight="@+id/text_weather"
-        android:layout_alignEnd="@+id/text_weather" />
+        android:id="@+id/linearLayout3"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignLeft="@+id/linearLayout2"
+        android:layout_alignStart="@+id/linearLayout2"
+        android:layout_alignRight="@+id/linearLayout2"
+        android:layout_alignEnd="@+id/linearLayout2">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="当前天气："
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_marginTop="14dp"
-        android:layout_below="@+id/textView9"
-        android:layout_alignLeft="@+id/textView9"
-        android:layout_alignStart="@+id/textView9" />
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前天气："
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            />
 
-    <TextView
-        android:id="@+id/text_weather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView11"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_toRightOf="@+id/textView11"
-        android:text="多云"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:layout_alignRight="@+id/textView14"
-        android:layout_alignEnd="@+id/textView14"
-        android:layout_alignBottom="@+id/textView11" />
+        <TextView
+            android:id="@+id/supply_future_weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/button9"
@@ -135,11 +138,11 @@
         android:text="时间"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        android:layout_below="@+id/textView11"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_below="@+id/linearLayout3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/button10"
@@ -156,7 +159,7 @@
         android:layout_alignStart="@+id/button9" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner_supply_future"
         android:layout_width="250dp"
         android:layout_height="35dp"
         android:layout_alignBottom="@+id/button9"
@@ -169,29 +172,29 @@
         android:layout_toEndOf="@+id/button9" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/btn_supply_future_search"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
+        android:layout_alignEnd="@+id/supply_query_future_area"
         android:layout_alignLeft="@+id/button10"
         android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/supply_query_future_area"
         android:layout_alignStart="@+id/button10"
         android:layout_marginBottom="21dp"
         android:background="@android:color/holo_orange_light"
         android:text="查询"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:layout_alignRight="@+id/textView18"
-        android:layout_alignEnd="@+id/textView18" />
+        android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/supply_query_future_area"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_alignBottom="@+id/button10"
-        android:layout_alignEnd="@+id/spinner2"
-        android:layout_alignLeft="@+id/spinner2"
-        android:layout_alignRight="@+id/spinner2"
-        android:layout_alignStart="@+id/spinner2"
+        android:layout_alignEnd="@+id/spinner_supply_future"
+        android:layout_alignLeft="@+id/spinner_supply_future"
+        android:layout_alignRight="@+id/spinner_supply_future"
+        android:layout_alignStart="@+id/spinner_supply_future"
         android:text="辽宁省 沈阳市 和平区"
         android:textAlignment="center"
         android:textColor="@color/black"

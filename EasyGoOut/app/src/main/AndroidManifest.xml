@@ -33,6 +33,8 @@
         <activity android:name=".TexiSpotQueryActivity" />
         <activity android:name=".PoiSearchDemo"/>
         <activity android:name=".TexiSpotQueryResultActivity"/>
+        <activity android:name=".SupplyQueryActivity"/>
+        <activity android:name=".SupplyQueryResultActivity"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="vWrDxVn5HRNPGS9rBYDC6alGoG7qOD9E" />

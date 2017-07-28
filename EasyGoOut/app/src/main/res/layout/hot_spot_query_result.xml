@@ -29,7 +29,7 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/text_time"
+        android:id="@+id/supply_future_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView9"
@@ -39,8 +39,8 @@
         android:text="8:23"
         android:textColor="@color/black"
         android:textSize="20sp"
-        android:layout_alignRight="@+id/text_weather"
-        android:layout_alignEnd="@+id/text_weather" />
+        android:layout_alignRight="@+id/supply_future_weather"
+        android:layout_alignEnd="@+id/supply_future_weather" />
 
     <TextView
         android:id="@+id/textView11"
@@ -55,7 +55,7 @@
         android:layout_alignStart="@+id/textView9" />
 
     <TextView
-        android:id="@+id/text_weather"
+        android:id="@+id/supply_future_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView11"
@@ -97,8 +97,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView19"
-        android:layout_alignRight="@+id/text_weather"
-        android:layout_alignEnd="@+id/text_weather"
+        android:layout_alignRight="@+id/supply_future_weather"
+        android:layout_alignEnd="@+id/supply_future_weather"
         android:layout_toRightOf="@+id/textView19"
         android:layout_toEndOf="@+id/textView19" />
 
