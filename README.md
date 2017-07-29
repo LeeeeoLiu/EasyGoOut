@@ -111,6 +111,7 @@ configurations.all {
 - [ ] 搜索结果listview显示
 - [ ] listview 随滑动变长
 - [ ] qq、微信、微博分享功能
+- [ ] mData.get(0).get("texi_record_loc").toString()
 
 
 ## 待完善功能

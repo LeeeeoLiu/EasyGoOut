@@ -37,6 +37,7 @@
         <activity android:name=".SupplyQueryResultActivity"/>
         <activity android:name=".HotSpotQueryActivity"/>
         <activity android:name=".TexiHistoryActivity"/>
+        <activity android:name=".TexiHistoryLocationActivity"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="vWrDxVn5HRNPGS9rBYDC6alGoG7qOD9E" />
