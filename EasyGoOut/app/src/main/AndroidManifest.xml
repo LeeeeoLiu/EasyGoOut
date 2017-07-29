@@ -11,7 +11,8 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -31,13 +32,18 @@
         </activity>
         <activity android:name=".NavigateActivity" />
         <activity android:name=".TexiSpotQueryActivity" />
-        <activity android:name=".PoiSearchDemo"/>
-        <activity android:name=".TexiSpotQueryResultActivity"/>
-        <activity android:name=".SupplyQueryActivity"/>
-        <activity android:name=".SupplyQueryResultActivity"/>
-        <activity android:name=".HotSpotQueryActivity"/>
-        <activity android:name=".TexiHistoryActivity"/>
-        <activity android:name=".TexiHistoryLocationActivity"/>
+        <activity android:name=".PoiSearchDemo" />
+        <activity android:name=".TexiSpotQueryResultActivity" />
+        <activity android:name=".SupplyQueryActivity" />
+        <activity android:name=".SupplyQueryResultActivity" />
+        <activity android:name=".HotSpotQueryActivity" />
+        <activity android:name=".TexiHistoryActivity" />
+        <activity android:name=".TexiHistoryLocationActivity" />
+        <activity android:name=".UserCenterActivity" />
+        <activity android:name=".UserCenterChangeInfo" />
+        <activity android:name=".UserCenterChangePwd" />
+        <activity android:name=".UserCenterShareApp" />
+
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="vWrDxVn5HRNPGS9rBYDC6alGoG7qOD9E" />

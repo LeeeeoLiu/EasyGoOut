@@ -39,7 +39,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
-        app:srcCompat="@drawable/raw_1489201154" />
+        android:src="@drawable/raw_1489201154"/>
 
     <TextView
         android:id="@+id/textView7"
@@ -162,7 +162,7 @@
         android:layout_below="@+id/btn_share_app"
         android:layout_marginTop="22dp"
         android:background="@drawable/button_style_deep_orange"
-        android:text="退出应用"
+        android:text="退出登录"
         android:textSize="20sp" />
 
 </RelativeLayout>

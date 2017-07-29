@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -54,13 +55,13 @@ public class LoginActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             String s = intent.getAction();
             if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_ERROR)) {
-                Toast.makeText(LoginActivity.this,"key 验证出错! 错误码 :" + intent.getIntExtra
+                Toast.makeText(LoginActivity.this, "key 验证出错! 错误码 :" + intent.getIntExtra
                         (SDKInitializer.SDK_BROADTCAST_INTENT_EXTRA_INFO_KEY_ERROR_CODE, 0)
-                        +  " ; 请在 AndroidManifest.xml 文件中检查 key 设置",Toast.LENGTH_SHORT).show();
+                        + " ; 请在 AndroidManifest.xml 文件中检查 key 设置", Toast.LENGTH_SHORT).show();
             } else if (s.equals(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK)) {
-                Toast.makeText(LoginActivity.this,"key 验证成功! 功能可以正常使用",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "key 验证成功! 功能可以正常使用", Toast.LENGTH_SHORT).show();
             } else if (s.equals(SDKInitializer.SDK_BROADCAST_ACTION_STRING_NETWORK_ERROR)) {
-                Toast.makeText(LoginActivity.this,"网络出错",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "网络出错", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -84,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
+
         // 注册 SDK 广播监听者
         IntentFilter iFilter = new IntentFilter();
         iFilter.addAction(SDKInitializer.SDK_BROADTCAST_ACTION_STRING_PERMISSION_CHECK_OK);
@@ -95,6 +97,17 @@ public class LoginActivity extends AppCompatActivity {
         SDKInitializer.initialize(context);
         BmobSMS.initialize(context, "19287f613fa7556cf8a5693760c1ea92");
         AVOSCloud.initialize(this, "IakY4fesWp0RPmzUA9tP1f8z-gzGzoHsz", "NXUzlQGYgjuzTyhhNiuF2tMu");
+
+        final SharedPreferences cache = getSharedPreferences("user_cache", Context.MODE_PRIVATE);
+//        cache.edit().putString("name", "小张").putInt("age", 11).commit();
+        String tmpUserName = cache.getString("user_name", null);
+//        cache.getString()
+
+        if (tmpUserName != null && !tmpUserName.equals("")) {
+            Toast.makeText(LoginActivity.this, "欢迎回来," + tmpUserName, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(LoginActivity.this, NavigateActivity.class);
+            startActivity(intent);
+        }
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,12 +126,12 @@ public class LoginActivity extends AppCompatActivity {
                                 public void done(AVObject avObject, AVException e) {
                                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(LoginActivity.this, NavigateActivity.class);
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("user_name", userName);
-                                    bundle.putString("user_type", avObject.getString("user_type"));
-                                    Log.d("lll",avObject.getString("user_type"));
-//                            bundle.putInt("enter_state", 0);
-                                    intent.putExtras(bundle);
+                                    Log.d("lll", avObject.getString("user_type"));
+
+                                    SharedPreferences cache = getSharedPreferences("user_cache", Context.MODE_PRIVATE);
+                                    cache.edit().putString("user_name", userName).commit();
+                                    cache.edit().putString("user_type", avObject.getString("user_type")).commit();
+                                    cache.edit().putString("user_head", avObject.getString("user_head")).commit();
                                     startActivity(intent);
                                 }
                             });
@@ -219,12 +232,16 @@ public class LoginActivity extends AppCompatActivity {
                             todo.put("user_name", registerName.getText().toString());
                             todo.put("user_password", registerPwd.getText().toString());
                             todo.put("user_phone", registerPhone.getText().toString());// 只要添加这一行代码，服务端就会自动添加这个字段
+                            todo.put("user_type", "乘客");
                             todo.saveInBackground(new SaveCallback() {
                                 @Override
                                 public void done(AVException e) {
                                     if (e == null) {
                                         // 存储成功
                                         Toast.makeText(LoginActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                                        SharedPreferences cache = getSharedPreferences("user_cache", Context.MODE_PRIVATE);
+                                        cache.edit().putString("user_name", registerName.getText().toString()).commit();
+                                        cache.edit().putString("user_type", "乘客").commit();
                                         dialog.dismiss();
                                     } else {
                                         // 失败的话，请检查网络环境以及 SDK 配置是否正确

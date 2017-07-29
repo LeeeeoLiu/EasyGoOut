@@ -1,5 +1,6 @@
-# EasyGoOut
+# EasyGoOut-出行易
 
+让你的出行从容不迫
 
 
 ### 所有原型设计已初步完成layout
@@ -16,138 +17,76 @@
 - 热点查询
 
 
-### 已解决问题
-#### Android:label居中显示 
-主要原理是，在ToolBar中添加一个TextView，然后你就可以通过设置TextView的样式，来达到你想要的效果。
-设置原来的toolbar不显示，在styles.xml
-
-```
-<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-```
-改为
-
-```
-<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-```
-   
-将ToolBar自定义
-   
-```
-   <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/toolbar8"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentTop="true"
-    android:background="?attr/colorPrimary"
-    android:minHeight="?attr/actionBarSize"
-    android:theme="?attr/actionBarTheme">
-
-    <TextView
-        android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="出行易，让你的出行从容不迫"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-</android.support.v7.widget.Toolbar>
-
-```
-   
-最后在你要使用ToolBar的地方include即可
-   
-```
-   <include layout="@layout/tool_bar_top"/>
-```
-
-#### build报错
-
-```
-
-Error:Execution failed for task ':app:processDebugManifest'.
-> Manifest merger failed : Attribute meta-data#android.support.VERSION@value value=(25.3.1) from [com.android.support:design:25.3.1] AndroidManifest.xml:27:9-31
-  	is also present at [com.android.support:appcompat-v7:26.0.0-alpha1] AndroidManifest.xml:27:9-38 value=(26.0.0-alpha1).
-  	Suggestion: add 'tools:replace="android:value"' to <meta-data> element at AndroidManifest.xml:25:5-27:34 to override.
-
-```
-
-把下面这些代码添加到build.gradle最后里即可
-
-
-```
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion '25.3.0'
-            }
-        }
-    }
-}
-```
-
-#### Caused by: android.os.NetworkOnMainThreadException
-
-这个是因为一个APP如果在主线程中请求网络操作，将会抛出此异常。Android这个设计是为了防止网络请求时间过长而导致界面假死的情况发生。
-
-##### 解决办法
-
-将请求网络资源的代码使用Thread去操作。在Runnable中做HTTP请求，不用阻塞UI线程。
 
 
 ### 待解决问题
 - [ ] tool bar返回按钮设置
-- [ ] TextView下划线
+- [x] TextView下划线
 - [ ] button right arrow
-- [ ] edit text 空白输入框
-- [ ] 热点查询结果网格分区
-- [ ] map显示
-- [ ] map下方附近地点显示
-- [ ] 搜索结果listview显示
-- [ ] listview 随滑动变长
-- [ ] qq、微信、微博分享功能
+- [x] edit text 空白输入框
+- [x] 热点查询结果网格分区
+- [x] map显示
+- [x] map下方附近地点显示
+- [x] 搜索结果listview显示
+- [x] listview 随滑动变长
+- [x] qq、微信、微博分享功能
 - [ ] mData.get(0).get("texi_record_loc").toString()
 
 
 ## 待完善功能
 
-- [x] 用户注册根据数据库判断是否重复
 - [ ] 找回密码功能
+
+## 待完成功能
+
+- [ ] 热点查询
+- [ ] 供需查询中的查询历史数据
+
+
+## 本地数据存储SharedPreferences
+
+使用Java自带的SharedPreferences，来存储用户名和用户类型以及用户头像文件所在路径，避免了新建intent时每次都需要用bundle来传数据。
+
+|键|解释|
+|-------|-------|
+|user_name|用户名|
+|user_type|用户类型|
+|user_head|用户头像文件所在路径|
+
+
 
 ## 使用第三方
 
-### 百度地图sdk
+### 百度地图sdk（主要为Poi检索以及路径导航）
 
-*****
+- Poi检索
+
+主要用在***打车点推荐***功能中，查询指定位置附近的poi点，供用户选取。
+
+- 路径导航
+
+主要用在***打车点历史记录***功能中，用于显示历史打车点与当前位置的路径关系。
 
 ### bmob后端云服务平台
 
-*****
+原计划是用它来做云端数据存储，但是短信sdk和整体sdk包貌似有冲突，搞了很久没找到解决办法，于是选择了LeanCloud作云端数据存储。
 
-用于发送验证短信，
+使用bomb用于***注册***和***找回密码***时发送验证短信。
 
 ### LeanCloud
-
-*****
 
 用于数据存储，免费或收费，免费数据API请求30,000／天，HTTP文件流量 500 MB/天，开发够用
 
 领先的 BaaS 提供商，为移动开发提供强有力的后端支持
 
-#### 一站式后端云服务
-包括云存储、数据分析、用户关系、消息推送、即时通信等现代应用基础模块，满足移动开发所有需求。
-#### 高效开发
-提供全平台 SDK 支持，帮助各平台开发者快速集成，研发与业务高效联动，让产品迅速到达市场。
+用来存储用户信息
+
+|user_name|user_password|user_phone|user_type|user_head|
+|-----|----|----|-------|----|------|----|-----|-----|-----|
+|用户名|用户登录密码|用户手机号|用户类型|用户头像文件路径|
 
 
 ### 心知天气
-
-*****
 
 用于天气预报，免费或收费，免费访问量限额：400次/小时，开发够用
 
@@ -297,4 +236,134 @@ http://api.map.baidu.com/staticimage/v2
 |labelStyles	|否|	null|	标签样式 content, fontWeight,fontSize,fontColor,bgColor, border。与labels一一对应。|
 |paths	|否	|null	|折线，可通过经纬度或地址/地名描述；多个折线用竖线"|"分隔；每条折线的点用分号";"分隔；点坐标用逗号","分隔。坐标格式：lng<经度>，lat<纬度>，例如116.43213,38.76623。|
 |pathStyles|	否	|null	|折线样式color,weight,opacity[,fillColor]。
+
+### 生产实习过程中遇到的一些问题及解决办法
+
+#### Android:label居中显示 
+主要原理是，在ToolBar中添加一个TextView，然后你就可以通过设置TextView的样式，来达到你想要的效果。
+设置原来的toolbar不显示，在styles.xml
+
+```
+<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+```
+改为
+
+```
+<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+```
+   
+将ToolBar自定义
+   
+```
+   <?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="?attr/colorPrimary"
+    android:minHeight="?attr/actionBarSize"
+    android:theme="?attr/actionBarTheme">
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="出行易，让你的出行从容不迫"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</android.support.v7.widget.Toolbar>
+
+```
+   
+最后在你要使用ToolBar的地方include即可
+   
+```
+   <include layout="@layout/tool_bar_top"/>
+```
+
+#### build报错
+
+```
+
+Error:Execution failed for task ':app:processDebugManifest'.
+> Manifest merger failed : Attribute meta-data#android.support.VERSION@value value=(25.3.1) from [com.android.support:design:25.3.1] AndroidManifest.xml:27:9-31
+  	is also present at [com.android.support:appcompat-v7:26.0.0-alpha1] AndroidManifest.xml:27:9-38 value=(26.0.0-alpha1).
+  	Suggestion: add 'tools:replace="android:value"' to <meta-data> element at AndroidManifest.xml:25:5-27:34 to override.
+
+```
+
+把下面这些代码添加到build.gradle最后里即可
+
+
+```
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.3.0'
+            }
+        }
+    }
+}
+```
+
+#### Caused by: android.os.NetworkOnMainThreadException
+
+这个是因为一个APP如果在主线程中请求网络操作，将会抛出此异常。Android这个设计是为了防止网络请求时间过长而导致界面假死的情况发生。
+
+##### 解决办法
+
+将请求网络资源的代码使用Thread去操作。在Runnable中做HTTP请求，不用阻塞UI线程。
+
+
+
+#### open failed: EACCES (Permission denied)
+
+For API 23+ you need to request the read/write permissions even if they are already in your manifest.
+
+```
+
+// Storage Permissions
+private static final int REQUEST_EXTERNAL_STORAGE = 1;
+private static String[] PERMISSIONS_STORAGE = {
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+};
+
+/**
+ * Checks if the app has permission to write to device storage
+ *
+ * If the app does not has permission then the user will be prompted to grant permissions
+ *
+ * @param activity
+ */
+public static void verifyStoragePermissions(Activity activity) {
+    // Check if we have write permission
+    int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+    if (permission != PackageManager.PERMISSION_GRANTED) {
+        // We don't have permission so prompt the user
+        ActivityCompat.requestPermissions(
+                activity,
+                PERMISSIONS_STORAGE,
+                REQUEST_EXTERNAL_STORAGE
+        );
+    }
+}
+```
+
+AndroidManifest.xml
+
+```
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+```
+
 

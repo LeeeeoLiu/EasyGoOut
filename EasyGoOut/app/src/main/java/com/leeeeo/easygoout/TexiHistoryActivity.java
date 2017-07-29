@@ -214,6 +214,13 @@ public class TexiHistoryActivity extends AppCompatActivity {
             imageButtonShare.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
+                    Intent intent1=new Intent(Intent.ACTION_SEND);
+                    intent1.putExtra(Intent.EXTRA_TEXT,"出行易\n地点："+randomPlace[position % 6]+"\n时间："+mData.get(position).get("texi_record_date").toString());
+                    intent1.setType("text/plain");
+                    startActivity(Intent.createChooser(intent1,"share"));
+
 //                    Toast.makeText(TexiHistoryActivity.this, "clicked share button " + position, Toast.LENGTH_SHORT).show();
 //                    Toast.makeText(TexiHistoryActivity.this, mData.get(0).get("texi_record_loc").toString(), Toast.LENGTH_SHORT).show();
                 }
